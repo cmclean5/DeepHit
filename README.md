@@ -193,6 +193,11 @@ if [ "$my_r_setup" == "arm_64" ]; then
 
 <summary>Installing Tensorflow on a mac ARM64-M1 chip </summary>
 
+### install miniforge via brew
+
+```bash   
+> arch -arm64 brew install miniforge
+```
 
 </details>
 
