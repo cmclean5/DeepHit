@@ -23,6 +23,8 @@ Start R, and from within R run:
 
 ---
 
+### Install R, python, tensorflow on Mac
+
 <details>
 
 <summary>Seting up Tensorflow with R on a Mac ARM64-M1 chip </summary>
