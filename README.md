@@ -4,7 +4,7 @@ R implementation of python [DeepHit competing risk model](https://github.com/cmc
 
 <details>
 
-<summary>Seting up Tensorflow with R on a mac ARM64-M1 chip </summary>
+<summary>Seting up Tensorflow with R on a Mac ARM64-M1 chip </summary>
 
 ### .bashrc file
 
@@ -189,9 +189,44 @@ if [ "$my_r_setup" == "arm_64" ]; then
 ```
 </details>
 
+
 <details>
 
-<summary>Installing Tensorflow on a mac ARM64-M1 chip </summary>
+<summary>Seting up R on a mac ARM64-M1 chip </summary>
+
+### Installing R version 4.2 (or higher)
+
+The easiest way is to install R on Mac is through [CRAN](https://cran.r-project.org) by going to the CRAN downloads page and following the links For Apple silicon (M1/M2) Macs. The next step is to click on the "R-4.3.1-arm64.pkg" (or newer version) file to begin the installation.
+
+### Installing RStudio
+
+To download RStudio, go to the [RStudio downloads page](https://posit.co/download/rstudio-desktop/#download) and get the .dmg for Mac OS, remember to keep default installation options.
+
+### R packages to install for tensorflow
+
+```R
+install.packages("base64enc")
+install.packages("reticulate")
+install.packages("keras")
+install.packages("tensorflow")
+```
+
+## Note tensorflow and keras in R 4.2, might have to download the
+## packages and install them manually:
+> cd ~/Downloads
+> wget https://www.stats.bris.ac.uk/R/bin/macosx/big-sur-arm64/contrib/4.2/tensorflow_2.7.0.tgz
+> R CMD INSTALL tensorflow_2.7.0.tgz
+> wget https://www.stats.bris.ac.uk/R/bin/macosx/big-sur-arm64/contrib/4.2/keras_2.7.0.tgz
+> R CMD INSTALL keras_2.7.0.tgz
+
+
+</details>
+
+
+
+<details>
+
+<summary>Installing Tensorflow on a Mac ARM64-M1 chip </summary>
 
 ### install miniforge via brew
 
