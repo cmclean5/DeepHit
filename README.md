@@ -3,7 +3,7 @@ R implementation of python [DeepHit competing risk model](https://github.com/cmc
 
 ---
 
-### To run model from R
+### Run DeepHit model on example dataset in R
 
 Run DeepHit model over our Breast Cancer anthracyline exposure cohort:
 
