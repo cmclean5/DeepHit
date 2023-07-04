@@ -199,38 +199,41 @@ if [ "$my_r_setup" == "arm_64" ]; then
 arch -arm64 brew install miniforge
 ```
 
-### create a new environment called r-reticulate
+### (1) create a new environment called r-reticulate
 ```bash
  conda create --name r-reticulate python=3.9
 ```
 
-You'll find this environment create in: '/opt/homebrew/Caskroom/miniforge/base/envs/r-reticulate'
+You'll find this environment create in 
+```bash
+/opt/homebrew/Caskroom/miniforge/base/envs/r-reticulate
+```
 
-### to activate conda, first init it
+### (2) to activate conda, first init it
 ```bash
 source conda_init.sh
 ```
 Note this scirpt is in SCRIPTS/UTILITIES/
 
-### now can activate our environment
+### (3) now can activate our environment
 ```bash
 conda activate r-reticulate
 ```
 
-### install packages need for plotting keras model
+### (4) install packages need for plotting keras model
 ```bash
  pip install pydot
  arch -arm64 brew install graphviz
 ```
 
-### install tensorflow
+### (5) install tensorflow
 ```bash
  conda install -c apple tensorflow-deps
  python -m pip install tensorflow-macos
  python -m pip install tensorflow-metal
  python -m pip install tensorflow-addons
 ```
-### You'll find tensorflow installed at
+### (6) You'll find tensorflow installed at
 ```bash
 /opt/homebrew/Caskroom/miniforge/base/pkgs/
 ```
