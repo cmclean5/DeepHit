@@ -204,6 +204,8 @@ To download RStudio, go to the [RStudio downloads page](https://posit.co/downloa
 
 ### R packages to install for tensorflow
 
+Start R from bash or RStudio
+
 ```R
 install.packages("base64enc")
 install.packages("reticulate")
@@ -211,14 +213,14 @@ install.packages("keras")
 install.packages("tensorflow")
 ```
 
-## Note tensorflow and keras in R 4.2, might have to download the
-## packages and install them manually:
-> cd ~/Downloads
-> wget https://www.stats.bris.ac.uk/R/bin/macosx/big-sur-arm64/contrib/4.2/tensorflow_2.7.0.tgz
-> R CMD INSTALL tensorflow_2.7.0.tgz
-> wget https://www.stats.bris.ac.uk/R/bin/macosx/big-sur-arm64/contrib/4.2/keras_2.7.0.tgz
-> R CMD INSTALL keras_2.7.0.tgz
-
+## Note install tensorflow and keras in R, might have to download & install manually
+```bash
+cd ~/Downloads
+wget https://www.stats.bris.ac.uk/R/bin/macosx/big-sur-arm64/contrib/4.2/tensorflow_2.7.0.tgz
+R CMD INSTALL tensorflow_2.7.0.tgz
+wget https://www.stats.bris.ac.uk/R/bin/macosx/big-sur-arm64/contrib/4.2/keras_2.7.0.tgz
+R CMD INSTALL keras_2.7.0.tgz
+```
 
 </details>
 
