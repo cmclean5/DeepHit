@@ -213,7 +213,7 @@ install.packages("keras")
 install.packages("tensorflow")
 ```
 
-## Note install tensorflow and keras in R, might have to download & install manually
+### Note install tensorflow and keras in R, might have to download & install manually
 ```bash
 cd ~/Downloads
 wget https://www.stats.bris.ac.uk/R/bin/macosx/big-sur-arm64/contrib/4.2/tensorflow_2.7.0.tgz
