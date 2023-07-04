@@ -196,8 +196,21 @@ if [ "$my_r_setup" == "arm_64" ]; then
 ### install miniforge via brew
 
 ```bash   
-> arch -arm64 brew install miniforge
+arch -arm64 brew install miniforge
 ```
+
+## create a new environment called r-reticulate
+```bash
+ conda create --name r-reticulate python=3.9
+```
+
+You'll find this environment create in: '/opt/homebrew/Caskroom/miniforge/base/envs/r-reticulate'
+
+## to activate conda, first init it
+```bash
+source conda_init.sh
+```
+Note this scirpt is in SCRIPTS/UTILITIES/
 
 </details>
 
