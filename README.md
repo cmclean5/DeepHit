@@ -25,8 +25,8 @@ Start R, and from within R run:
 
 ### Install R, python, tensorflow on Mac
 
-- **R      version 4.2 (or higher)**
-- **Python version 3.9 (or higher)**
+- **R      version 4.2 (or higher), and**
+- **Python version 3.9 (or higher).**
 
 <details>
 
