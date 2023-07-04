@@ -1,2 +1,2 @@
-# DeepHit
-R implementation of python DeepHit competing risk code
+# Public Health Models
+R implementation of Models to study Public Health Data.
