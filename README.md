@@ -1,6 +1,17 @@
 # DeepHit Model
 R implementation of python [DeepHit competing risk model](https://github.com/cmclean5/PublicHealthModels/issues/1)
 
+---
+
+### To run model from R
+
+```bash
+git clone -b DeepHit 
+```
+
+```R
+ 
+```
 
 <details>
 
@@ -298,5 +309,5 @@ conda activate r-reticulate
 ### Task-list
 
 - [x] translate [DeepHit](https://github.com/cmclean5/PublicHealthModels/issues/1) from python to R
-- [ ] translate [Dynamic-DeepHit]() from python to R
+- [ ] translate [Dynamic-DeepHit](https://github.com/cmclean5/PublicHealthModels/issues/3) from python to R
 - [ ] hyperparameter tuning of models
