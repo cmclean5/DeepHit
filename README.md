@@ -186,10 +186,14 @@ if [ "$my_r_setup" == "arm_64" ]; then
 
     ## location to where R installs packages
     export R_LIBS_USER="$HOME/.R/R-4.2.0/library"
+</details>
 
-    echo ": R 4.2 setup for mac M1 arm_64"
-fi
-```
+
+<details>
+
+<summary>Installing Tensorflow on a mac ARM64-M1 chip </summary>
+
+
 </details>
 
 
