@@ -4,13 +4,11 @@ R implementation of python [DeepHit competing risk model](https://github.com/cmc
 
 <details>
 
-<summary>Seting up Tensorflow with R on a mac M1 chip </summary>
+<summary>Seting up Tensorflow with R on a mac ARM64-M1 chip </summary>
 
 ### .bashrc file
 
-You can add text within a collapsed section. 
-
-You can add an image or a code block, too.
+environment variables to define in .bashrc file to set-up R (4.2), python (3.9)   
 
 ```bash
    ##TERMINAL SETTINGS and Terminal Aliases
