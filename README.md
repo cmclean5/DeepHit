@@ -5,12 +5,20 @@ R implementation of python [DeepHit competing risk model](https://github.com/cmc
 
 ### To run model from R
 
+Run DeepHit model over our Breast Cancer anthracyline exposure cohort:
+
 ```bash
-git clone -b DeepHit 
+git clone -b DeepHit https://github.com/cmclean5/PublicHealthModels.git
 ```
 
+```bash
+cd PublicHealthModels
+```
+
+Start R, and from within R run:
+
 ```R
- 
+   source('analysisAnthracylineExposure.R')
 ```
 
 <details>
