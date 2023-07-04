@@ -1,7 +1,7 @@
 # DeepHit Model
-R implementation of python DeepHit competing risk model
+R implementation of python DeepHit competing risk model #1
 
-Reference #
+
 
 
 
