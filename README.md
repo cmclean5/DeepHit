@@ -76,6 +76,16 @@ It can be run from within R by:
   
 ---
 
+### DeepHit model issues
+
+- We need to test output of R code with author's python code on their synthetic data.
+- Hyperparameters need tuning - random grid search. Especially parameters $\alpha$, $\beta$ and $\gamma$.
+- Rewrote `loss1` in `customLoss.R` to follow what's written in the paper. This new `loss1` function 
+  needs testing against the author's original `loss1` function.
+- There was an error in author's `loss3` function, which need further investigation. 
+
+---
+
 ### Install R, python, tensorflow on Mac
 
 - **R      version 4.2 (or higher), and**
