@@ -62,6 +62,111 @@ It can be run from within R by:
 
 <details>
 
+<summary>Seting up R on a mac ARM64-M1 chip </summary>
+
+### Installing R version 4.2 (or higher)
+
+The easiest way is to install R on Mac is through [CRAN](https://cran.r-project.org) by going to the CRAN downloads page and following the links For Apple silicon (M1/M2) Macs. The next step is to click on the "R-4.3.1-arm64.pkg" (or newer version) file to begin the installation.
+
+### Installing RStudio
+
+To download RStudio, go to the [RStudio downloads page](https://posit.co/download/rstudio-desktop/#download) and get the .dmg for Mac OS, remember to keep default installation options.
+
+### R packages to install for tensorflow
+
+Start R from bash or RStudio
+
+```R
+install.packages("base64enc")
+install.packages("reticulate")
+install.packages("keras")
+install.packages("tensorflow")
+```
+
+### Note install tensorflow and keras in R, might have to download & install manually
+```bash
+cd ~/Downloads
+wget https://www.stats.bris.ac.uk/R/bin/macosx/big-sur-arm64/contrib/4.2/tensorflow_2.7.0.tgz
+R CMD INSTALL tensorflow_2.7.0.tgz
+wget https://www.stats.bris.ac.uk/R/bin/macosx/big-sur-arm64/contrib/4.2/keras_2.7.0.tgz
+R CMD INSTALL keras_2.7.0.tgz
+```
+
+</details>
+
+
+
+<details>
+
+<summary>Installing Tensorflow on a Mac ARM64-M1 chip </summary>
+
+### install miniforge via brew
+
+```bash   
+arch -arm64 brew install miniforge
+```
+
+### (1) create a new environment called r-reticulate
+```bash
+ conda create --name r-reticulate python=3.9
+```
+
+You'll find this environment create in 
+```bash
+/opt/homebrew/Caskroom/miniforge/base/envs/r-reticulate
+```
+
+### (2) to activate conda, first init it
+```bash
+source conda_init.sh
+```
+Where the `conda_init.sh` script is:
+```bash
+#!/bin/bash
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+```
+
+### (3) now can activate our environment
+```bash
+conda activate r-reticulate
+```
+
+### (4) install packages need for plotting keras model
+```bash
+ pip install pydot
+ arch -arm64 brew install graphviz
+```
+
+### (5) install tensorflow
+```bash
+ conda install -c apple tensorflow-deps
+ python -m pip install tensorflow-macos
+ python -m pip install tensorflow-metal
+ python -m pip install tensorflow-addons
+```
+### (6) You'll find tensorflow installed at
+```bash
+/opt/homebrew/Caskroom/miniforge/base/pkgs/
+```
+
+</details>
+
+<details>
+
 <summary>Seting up Tensorflow with R on a Mac ARM64-M1 chip </summary>
 
 ### .bashrc file
@@ -245,112 +350,6 @@ if [ "$my_r_setup" == "arm_64" ]; then
     ## location to where R installs packages
     export R_LIBS_USER="$HOME/.R/R-4.2.0/library"
 ```
-</details>
-
-
-<details>
-
-<summary>Seting up R on a mac ARM64-M1 chip </summary>
-
-### Installing R version 4.2 (or higher)
-
-The easiest way is to install R on Mac is through [CRAN](https://cran.r-project.org) by going to the CRAN downloads page and following the links For Apple silicon (M1/M2) Macs. The next step is to click on the "R-4.3.1-arm64.pkg" (or newer version) file to begin the installation.
-
-### Installing RStudio
-
-To download RStudio, go to the [RStudio downloads page](https://posit.co/download/rstudio-desktop/#download) and get the .dmg for Mac OS, remember to keep default installation options.
-
-### R packages to install for tensorflow
-
-Start R from bash or RStudio
-
-```R
-install.packages("base64enc")
-install.packages("reticulate")
-install.packages("keras")
-install.packages("tensorflow")
-```
-
-### Note install tensorflow and keras in R, might have to download & install manually
-```bash
-cd ~/Downloads
-wget https://www.stats.bris.ac.uk/R/bin/macosx/big-sur-arm64/contrib/4.2/tensorflow_2.7.0.tgz
-R CMD INSTALL tensorflow_2.7.0.tgz
-wget https://www.stats.bris.ac.uk/R/bin/macosx/big-sur-arm64/contrib/4.2/keras_2.7.0.tgz
-R CMD INSTALL keras_2.7.0.tgz
-```
-
-</details>
-
-
-
-<details>
-
-<summary>Installing Tensorflow on a Mac ARM64-M1 chip </summary>
-
-### install miniforge via brew
-
-```bash   
-arch -arm64 brew install miniforge
-```
-
-### (1) create a new environment called r-reticulate
-```bash
- conda create --name r-reticulate python=3.9
-```
-
-You'll find this environment create in 
-```bash
-/opt/homebrew/Caskroom/miniforge/base/envs/r-reticulate
-```
-
-### (2) to activate conda, first init it
-```bash
-source conda_init.sh
-```
-Where the `conda_init.sh` script is:
-```bash
-#!/bin/bash
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-```
-
-### (3) now can activate our environment
-```bash
-conda activate r-reticulate
-```
-
-### (4) install packages need for plotting keras model
-```bash
- pip install pydot
- arch -arm64 brew install graphviz
-```
-
-### (5) install tensorflow
-```bash
- conda install -c apple tensorflow-deps
- python -m pip install tensorflow-macos
- python -m pip install tensorflow-metal
- python -m pip install tensorflow-addons
-```
-### (6) You'll find tensorflow installed at
-```bash
-/opt/homebrew/Caskroom/miniforge/base/pkgs/
-```
-
 </details>
 
 ---
