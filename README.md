@@ -51,8 +51,17 @@ It can be run from within R by:
    source('analysisAnthracylineExposure.R')
 ```
 
-
-
+- The DeepHit model is built from a customised Keras `new_model_class` object and found in script `Keras_model.R`
+- The model architecture, i.e. how input, output and hidden layers are connected, can be found in the script
+  `model_architecture.R`. This script is where we pass our training, evaluation and test datasets to the DeepHit model.
+- The custom loss function for the model can be found in the script `customLoss.R`
+- Model hyperparameters can be set and found in: `Hyperparameters/Hyperparameter.R`
+- Evaluation metrics, i.e. concordance index (ci) and brier scores (br) in `evaluateFunctions.R`
+- Plotting functions for the ci metric can be found in `plotFunctions.R`
+- Example datasets can be found under directory: `datasets/`
+- Training, evaluation and test datasets are constructed from our example dataset in `datasetFunctions.R` 
+- Functions to construct mask1 and mask2, used in the custom loss function, are found in `formatFunctions.R`
+  
 ---
 
 ### Install R, python, tensorflow on Mac
