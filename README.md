@@ -20,6 +20,18 @@ Navigate into this local repository on your machine:
 cd PublicHealthModels
 ```
 
+Check if we're working in the DeepHit branch:
+
+```bash
+git branch -a
+```
+
+If not, change to DeepHit branch:
+
+```bash
+git checkout DeepHit
+```
+
 You'll need R, python, tensorflow and keras propery installed first - see summaries below. 
 Then starting R, you'll need the following R libraries installed:
 
