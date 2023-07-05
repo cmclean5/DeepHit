@@ -1,2 +1,8 @@
 # Public Health Models
-R implementation of Models to study Public Health Data.
+R implementation of machine learning models to study public health data.
+
+Branches:
+
+- [x] DeepHit
+- [ ] Dynamic-DeepHit
+- [ ] DeepSurv
