@@ -63,51 +63,61 @@ deephitLoss <- function(y_true, y_pred,
     ##------------------------------------------
     ## LOSS_1: Log-likelihood loss
     ## As described in deephit's github code 
-    ##------------------------------------------ 
+    ##------------------------------------------    
     I1    <- tf$sign(events)
     I1    <- tf$cast(I1, dtype = tf$float32)
-    tmp1  <- tf$reduce_sum(tf$reduce_sum(mask1 * y_pred, axis = 2L), axis = 1L, keepdims = TRUE)
-    tmp1  <- tf$keras$backend$clip(tmp1, epsilon, 1 - epsilon)
-    ## 
-    ## for uncenosred: log P(T=t,K=k|x)   'I1*log(tmp1)'
-    ## for censored:   log \sum P(T>t|x)  '(1.0-I1)*log(tmp1)'
-    loss1 <- -tf$reduce_sum(I1 * log(tmp1) + (1 - I1) * log(tmp1))
-    ##------------------------------------------
-    
-    ##------------------------------------------
-    ## TEST... code below should match eqn 2 in the deepHit paper,
-    ## as unsure about the definition of loss1 using deephit's github code above?
-    ## Gather non-cencored
-    runtest=0
-    if( runtest ){
-    crLoss=list()
-    for( e in 1:ne ){
-        E      = tf$cast(e, dtype=tf$int32)
-        crTemp = tf$equal(events,E)
-        s_mask = tf$boolean_mask(mask1[,(E-1L),],crTemp)
-        y_mask = tf$boolean_mask(y_pred[,(E-1L),],crTemp)
-        crSum  = tf$reduce_sum(s_mask*y_mask, axis=1L)
-        crSum  = tf$keras$backend$clip(crSum, epsilon, 1-epsilon)
-        crLoss[[e]] = tf$reduce_sum(log(crSum))
+
+    ## Hard coded for the moment, but choose
+    ## which implementation of loss1 to run?
+    run.authors = 1 ## run authors implementation of loss1
+    run.authors = 0 ## run our     implementation of loss1  
+
+    if( run.authors ){
+
+        tmp1  <- tf$reduce_sum(tf$reduce_sum(mask1 * y_pred, axis = 2L), axis = 1L, keepdims = TRUE)
+        tmp1  <- tf$keras$backend$clip(tmp1, epsilon, 1 - epsilon)
+        ## 
+        ## for uncenosred: log P(T=t,K=k|x)   'I1*log(tmp1)'
+        ## for censored:   log \sum P(T>t|x)  '(1.0-I1)*log(tmp1)'
+        loss1 <- -tf$reduce_sum(I1 * log(tmp1) + (1 - I1) * log(tmp1))
+        ##------------------------------------------
+
+    } else {
+        
+        ##------------------------------------------
+        ## TEST... code below should match eqn 2 in the deepHit paper,
+        ## as unsure about the definition of loss1 using deephit's github code
+        ## above?
+        ##------------------------------------------
+        ## Gather non-cencored
+        crLoss=list()
+        for( e in 1:ne ){
+            E      = tf$cast(e, dtype=tf$int32)
+            crTemp = tf$equal(events,E)
+            s_mask = tf$boolean_mask(mask1[,(E-1L),],crTemp)
+            y_mask = tf$boolean_mask(y_pred[,(E-1L),],crTemp)
+            crSum  = tf$reduce_sum(s_mask*y_mask, axis=1L)
+            crSum  = tf$keras$backend$clip(crSum, epsilon, 1-epsilon)
+            crLoss[[e]] = tf$reduce_sum(log(crSum))
+        }
+        tmp1 = -tf$reduce_sum(tf$stack(crLoss))    
+        ##
+        ## Gather censored 
+        cenLoss=list()
+        for( e in 1:ne ){
+            E        = tf$cast(e, tf$int32)
+            cenTemp  = (1-I1)
+            cen_mask = tf$boolean_mask(mask1[,(E-1L),],cenTemp)
+            y_mask   = tf$boolean_mask(y_pred[,(E-1L),],cenTemp)
+            cenLoss[[e]] = tf$reduce_sum(cen_mask*y_mask, axis=1L)
+        }
+        ## tmp2 ==> dims(cr, No: patients)
+        tmp2 = tf$reduce_sum(tf$stack(cenLoss, axis=1L), axis=1L)
+        tmp2 = tf$keras$backend$clip(tmp2, epsilon, 1-epsilon)
+        tmp2 = -tf$reduce_sum(log(1-tmp2))
+        loss1 = (tmp1+tmp2)
+        ##------------------------------------------
     }
-    tmp1 = -tf$reduce_sum(tf$stack(crLoss))    
-    ##
-    ## Gather censored 
-    cenLoss=list()
-    for( e in 1:ne ){
-        E        = tf$cast(e, tf$int32)
-        cenTemp  = (1-I1)
-        cen_mask = tf$boolean_mask(mask1[,(E-1L),],cenTemp)
-        y_mask   = tf$boolean_mask(y_pred[,(E-1L),],cenTemp)
-        cenLoss[[e]] = tf$reduce_sum(cen_mask*y_mask, axis=1L)
-    }
-    ## tmp2 ==> dims(cr, No: patients)
-    tmp2 = tf$reduce_sum(tf$stack(cenLoss, axis=1L), axis=1L)
-    tmp2 = tf$keras$backend$clip(tmp2, epsilon, 1-epsilon)
-    tmp2 = -tf$reduce_sum(log(1-tmp2))
-    loss1 = (tmp1+tmp2)
-    }
-    ##------------------------------------------
     
     ##------------------------------------------
     ## Mask to calculate LOSS_2 (ranking loss)
@@ -156,8 +166,10 @@ deephitLoss <- function(y_true, y_pred,
         I2    = tf$cast(tf$equal(events,E),dtype=tf$float32)
         tmp_e = tf$reshape(tf$slice(y_pred, c(0L,E-1L,0L), c(-1L,1L,-1L)), c(-1L, NT))
         tmp_e = tf$cast(tmp_e, dtype=tf$float32)
-        ####R     = tf$reduce_sum(tmp_e * mask2, axis=0L)
-        ####tmp_eta  = tf$reduce_mean( (R-I2)**2, axis=1L, keepdims=TRUE)
+        ## Writing in author's code, but does not seem to work?
+        ##R     = tf$reduce_sum(tmp_e * mask2, axis=0L)
+        ##tmp_eta  = tf$reduce_mean( (R-I2)**2, axis=1L, keepdims=TRUE)
+        ## Below code does work.
         R     = tf$reduce_sum(tmp_e * mask2, axis=1L)
         tmp_eta  = tf$reduce_mean( (R-I2)**2, axis=0L, keepdims=TRUE)
         eta[[e]] = tmp_eta
