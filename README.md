@@ -357,5 +357,6 @@ if [ "$my_r_setup" == "arm_64" ]; then
 ### Task-list
 
 - [x] translate [DeepHit](https://github.com/cmclean5/PublicHealthModels/issues/1) from python to R
+- [ ] duplicate `analysisAnthracylineExposure.R` for two further example datasets
 - [ ] translate [Dynamic-DeepHit](https://github.com/cmclean5/PublicHealthModels/issues/3) from python to R
 - [ ] hyperparameter tuning of models
