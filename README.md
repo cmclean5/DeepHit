@@ -1,25 +1,57 @@
 # DeepHit Model
 R implementation of python [DeepHit competing risk model](https://github.com/cmclean5/PublicHealthModels/issues/1)
 
+The DeepHit model makes no assumptions about the underlying stochastic process and allows for the possibility that the relationship between covariates and risk(s) changes over time. The DeepHit model can handle competing risks; i.e. settings in which there is more than one possible event of interest.
+
 ---
 
 ### Run DeepHit model on example dataset in R
 
-Run DeepHit model over our Breast Cancer anthracyline exposure cohort:
+To run the DeepHit model over our Breast Cancer anthracyline exposure cohort. 
+First clone the DeepHit branch from this repository: 
 
 ```bash
 git clone -b DeepHit https://github.com/cmclean5/PublicHealthModels.git
 ```
 
+Navigate into this local repository on your machine:
+
 ```bash
 cd PublicHealthModels
 ```
 
-Start R, and from within R run:
+You'll need R, python, tensorflow and keras propery installed first - see summaries below. 
+Then starting R, you'll need the following R libraries installed:
+
+```R
+## load R libraries we'll need for analysis 
+library(reticulate)
+library(tensorflow)
+library(tfdatasets) ## format training dataset in tensorflow format
+library(keras)      ## Deep learning packages, Keras API and tensorflow
+library(tidyverse)  ## rbernoulli
+library(data.table) ## 'shift' function
+library(lubridate)
+library(cvTools)
+library(caret)
+library(randomForestSRC) ## compute IPCW weights and IPCW pseudo RMST using random survival forest
+library(pseudo)    ## for pseudosurv function in DNNSurv package
+library(survival)
+
+## plotting library
+library(ggplot2)
+library(cowplot)
+library(gridExtra)
+library(tidybayes)
+```
+The main Drive script which runs the model over the example dataset is called `analysisAnthracylineExposure.R`. 
+It can be run from within R by:
 
 ```R
    source('analysisAnthracylineExposure.R')
 ```
+
+
 
 ---
 
