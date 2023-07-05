@@ -62,7 +62,7 @@ It can be run from within R by:
 
 <details>
 
-<summary>Seting up R on a mac ARM64-M1 chip </summary>
+<summary>Setting up R on a mac ARM64-M1 chip </summary>
 
 ### Installing R version 4.2 (or higher)
 
@@ -167,7 +167,7 @@ conda activate r-reticulate
 
 <details>
 
-<summary>Seting up Tensorflow with R on a Mac ARM64-M1 chip </summary>
+<summary>Setting environment, Tensorflow with R, on a Mac ARM64-M1 chip </summary>
 
 ### .bashrc file
 
