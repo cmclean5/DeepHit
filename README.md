@@ -5,4 +5,4 @@ Branches:
 
 - [x] DeepHit
 - [ ] Dynamic-DeepHit
-- [ ] DeepSurv
+- [x] DeepSurv
