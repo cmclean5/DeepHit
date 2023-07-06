@@ -1,5 +1,5 @@
 # Public Health Models
-R implementation of machine learning models to study public health data.
+R implementations of machine learning models to study survival analysis in public health data.
 
 Branches:
 
