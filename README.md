@@ -1,8 +1,5 @@
-# Public Health Models
-R implementation of machine learning models to study public health data.
+# DeepSurv Model
+R implementation of python [DeepSurv competing risk model](https://github.com/cmclean5/PublicHealthModels/issues/18)
 
-Branches:
+---
 
-- [x] DeepHit
-- [ ] Dynamic-DeepHit
-- [x] DeepSurv
