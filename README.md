@@ -3,7 +3,7 @@ R implementations of machine learning models to study survival analysis in publi
 
 Branches:
 
-- [x] DeepHit
+- [x] [DeepHit](https://github.com/cmclean5/PublicHealthModels/tree/DeepHit)
 - [ ] Dynamic-DeepHit
 - [x] DeepSurv
 
