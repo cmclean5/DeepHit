@@ -5,7 +5,7 @@ Branches:
 
 - [x] [DeepHit](https://github.com/cmclean5/PublicHealthModels/tree/DeepHit)
 - [ ] Dynamic-DeepHit
-- [x] DeepSurv
+- [x] [DeepSurv](https://github.com/cmclean5/PublicHealthModels/tree/DeepSurv)
 
 ---
 
