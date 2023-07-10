@@ -11,4 +11,4 @@ Branches:
 
 Papers:
 
-Papers related to models can be found in [issues]()
+Papers related to models can be found in [issues](https://github.com/cmclean5/PublicHealthModels/issues)
