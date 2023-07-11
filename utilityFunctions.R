@@ -177,9 +177,12 @@ survivalTime <- function(start.time=NULL, end.time=NULL, c.time=NULL,
         ## convert end date
         end.time   = as.vector(sapply(end.time,getDate))
 
-        ## convert multiple cardiac event dates
+        ## convert multiple cardiac event dates       
         event.time = as.vector(sapply(event.time, function(x)
-            appendDates("",as.character(as.numeric(getDate(splitRecurrence(x)))))))        
+            appendDates("",as.character(as.numeric(dateVector(splitRecurrence(x)))))))   
+        
+        ##event.time = as.vector(sapply(event.time, function(x)
+        ##  appendDates("",as.character(as.numeric(getDate(splitRecurrence(x)))))))        
         
         ## convert censor date
         c.time     = as.numeric(getDate(c.time))
@@ -830,7 +833,11 @@ appendDates <- function(oldStr,newStr,COLLAPSE=";",keep.all=TRUE){
     oldStr = as.character(oldStr)
     newStr = as.character(newStr)
 
-    if( newStr == "" || is.na(newStr) ){ return(oldStr); }
+    if( length(newStr)==1 && is.na(newStr) ){ return(oldStr); }
+
+    if( length(newStr)==1 && newStr == "" ){ return(oldStr); }
+    
+    ##if( newStr == "" || is.na(newStr) ){ return(oldStr); }
 
     if( length(oldStr) == 0 ){ return(newStr); }
     
@@ -1206,6 +1213,9 @@ SIMDscore2percentile <- function( x, method=c("quintile","decile"),
 
 }
 
+dateVector <- function(x, style=c("%Y-%m-%d","%d-%b-%Y","%d-%b-%y") ){
+    return(sapply(x,function(x) getDate(x)))
+}
 
 getDate <- function(x,style=c("%Y-%m-%d","%d-%b-%Y","%d-%b-%y") ){
     if( x == " " || x == "" || is.na(x) ){ x = NA; }
