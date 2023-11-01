@@ -26,7 +26,7 @@ CCEwe <- function(y_true, y_pred, alpha){
     ## smallest number
     epsilon = tf$keras$backend$epsilon()    
      
-    ## categorical crossentropy-entropy
+    ## categorical cross-entropy
     Z    =  tf$math$multiply(y_true,tf$math$log(y_pred))   
 
     ## weighted CCE
