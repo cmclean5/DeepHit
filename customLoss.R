@@ -70,14 +70,14 @@ deephitLoss <- function(y_true, y_pred,
     ## Hard coded for the moment, but choose
     ## which implementation of loss1 to run?
     run.authors = 1 ## run authors implementation of loss1
-    run.authors = 0 ## run our     implementation of loss1  
+    #run.authors = 0 ## run our     implementation of loss1  
 
     if( run.authors ){
 
         tmp1  <- tf$reduce_sum(tf$reduce_sum(mask1 * y_pred, axis = 2L), axis = 1L, keepdims = TRUE)
         tmp1  <- tf$keras$backend$clip(tmp1, epsilon, 1 - epsilon)
         ## 
-        ## for uncenosred: log P(T=t,K=k|x)   'I1*log(tmp1)'
+        ## for uncensored: log P(T=t,K=k|x)   'I1*log(tmp1)'
         ## for censored:   log \sum P(T>t|x)  '(1.0-I1)*log(tmp1)'
         loss1 <- -tf$reduce_sum(I1 * log(tmp1) + (1 - I1) * log(tmp1))
         ##------------------------------------------
@@ -89,7 +89,7 @@ deephitLoss <- function(y_true, y_pred,
         ## as unsure about the definition of loss1 using deephit's github code
         ## above?
         ##------------------------------------------
-        ## Gather non-cencored
+        ## Gather uncensored patients
         crLoss=list()
         for( e in 1:ne ){
             E      = tf$cast(e, dtype=tf$int32)
@@ -102,7 +102,7 @@ deephitLoss <- function(y_true, y_pred,
         }
         tmp1 = -tf$reduce_sum(tf$stack(crLoss))    
         ##
-        ## Gather censored 
+        ## Gather censored patients
         cenLoss=list()
         for( e in 1:ne ){
             E        = tf$cast(e, tf$int32)
